@@ -30,6 +30,8 @@ Phase 10 → Deployment
 
 ## Phase 1 — Project Setup & Scaffolding
 
+> **STATUS: COMPLETE** — Backend scaffolded and running. Frontend Next.js project exists. Frontend providers (React Query, Zustand) not yet wired up.
+
 **Goal:** Both projects (client + server) exist, run locally, and talk to each other.
 
 ### 1.1 — Create Backend Project
@@ -187,15 +189,17 @@ export const queryClient = new QueryClient({
 ```
 
 ### ✅ Phase 1 Checklist
-- [ ] `npm run dev` starts backend on port 5000 with no errors
-- [ ] `GET http://localhost:5000/api/health` returns `{ status: 'ok' }`
-- [ ] MongoDB connects successfully (check console log)
+- [x] `npm run dev` starts backend on port 5000 with no errors
+- [x] `GET http://localhost:5000/api/health` returns `{ status: 'ok' }`
+- [x] MongoDB connects successfully (check console log)
 - [ ] `npm run dev` starts frontend on port 3000 with no errors
 - [ ] Next.js default page loads in browser
 
 ---
 
 ## Phase 2 — Backend Auth
+
+> **STATUS: COMPLETE (backend)** — All models, controllers, routes, and middleware implemented. Endpoints not yet tested via REST client.
 
 **Goal:** Register, login, logout, and `/me` endpoints fully working with JWT httpOnly cookies.
 
@@ -317,9 +321,13 @@ Test every endpoint with a REST client (Postman / Thunder Client / curl):
 - [ ] `POST /api/auth/logout` clears cookie
 - [ ] Passwords are hashed in MongoDB (check Atlas)
 
+> **Files implemented:** `src/models/User.ts`, `src/utils/generateToken.ts`, `src/middleware/authMiddleware.ts`, `src/controllers/authController.ts`, `src/routes/authRoutes.ts`, `src/middleware/errorMiddleware.ts`
+
 ---
 
 ## Phase 3 — Frontend Auth
+
+> **STATUS: COMPLETE** — Login/register pages, useAuth hook, Zustand authStore, AuthGuard, QueryProvider all implemented.
 
 **Goal:** Register and login pages working, user persisted in Zustand, protected routes working.
 
@@ -445,6 +453,8 @@ Build base UI components in `src/components/ui/`:
 
 ## Phase 4 — Room Management (REST)
 
+> **STATUS: COMPLETE** — Room types, useRooms hooks, RoomCard/RoomList/CreateRoomModal components, dashboard and rooms pages all implemented.
+
 **Goal:** Users can create, browse, view, and delete study rooms. No real-time yet — pure REST.
 
 ### 4.1 — Room Model (Backend)
@@ -549,6 +559,8 @@ Build `src/components/layout/Header.tsx` — user avatar, name, logout button.
 ---
 
 ## Phase 5 — Socket.io Integration (Foundation)
+
+> **STATUS: COMPLETE** — socket singleton, useRoomSocket, roomStore with participants all implemented.
 
 **Goal:** Socket.io is connected, authenticated, and rooms can be joined/left in real-time.
 Participant list updates live. This is the foundation every real-time feature builds on.
@@ -697,6 +709,8 @@ Open the same room in two browser tabs (or two browsers):
 
 ## Phase 6 — Real-time Chat
 
+> **STATUS: COMPLETE** — chatStore, useChatSocket, ChatWindow/ChatMessage/ChatInput components, GET /api/rooms/:id/messages endpoint all implemented.
+
 **Goal:** Users in the same room can send and receive messages instantly.
 
 ### 6.1 — Message Model (Backend)
@@ -817,6 +831,8 @@ Test with two browser tabs in the same room:
 ---
 
 ## Phase 7 — Study Timer (Shared + Synced)
+
+> **STATUS: COMPLETE** — useTimerSocket, StudyTimer, TimerControls, SessionSummary, timer state in roomStore all implemented.
 
 **Goal:** Any participant can start a shared timer. All users in the room see the
 same timer. Late joiners sync to the correct elapsed time.
@@ -1042,6 +1058,8 @@ Test with two browser tabs in the same room:
 
 ## Phase 8 — Session History & User Profile
 
+> **STATUS: COMPLETE** — useSessions hooks, SessionCard/SessionList components, history page all implemented.
+
 **Goal:** Users can view their past study sessions and see total stats.
 
 ### 8.1 — Session Controller (Backend)
@@ -1108,6 +1126,8 @@ recent sessions for that specific room using `useGetRoomSessions(roomId)`.
 
 ## Phase 9 — Activity Dashboard
 
+> **STATUS: COMPLETE** — Full dashboard with stats, recent sessions, settings page, invite flow all implemented.
+
 **Goal:** The main dashboard gives a meaningful overview of user activity and rooms.
 
 ### 9.1 — Dashboard Page (Frontend)
@@ -1173,6 +1193,8 @@ Build `src/components/ui/Avatar.tsx`:
 ---
 
 ## Phase 10 — Deployment
+
+> **STATUS: NOT STARTED**
 
 **Goal:** Both backend and frontend are live, accessible, and fully functional in production.
 
@@ -1279,16 +1301,16 @@ Next.js 14, TypeScript, Tailwind CSS, TanStack Query, Zustand, Socket.io
 ## Implementation Order Summary
 
 ```
-Phase 1  →  Scaffolding              (both projects boot, MongoDB connects)
-Phase 2  →  Backend Auth             (register, login, logout, /me)
-Phase 3  →  Frontend Auth            (login page, Zustand, protected routes)
-Phase 4  →  Room CRUD                (create, browse, view rooms — REST only)
-Phase 5  →  Socket.io Foundation     (connect, join/leave rooms, participant presence)
-Phase 6  →  Real-time Chat           (send, receive, persist messages)
-Phase 7  →  Study Timer              (start, pause, sync, end — shared across clients)
-Phase 8  →  Session History          (history page, stats, React Query invalidation)
-Phase 9  →  Activity Dashboard       (stats bar, recent activity, invite, settings)
-Phase 10 →  Deployment               (Render + Vercel, production smoke test)
+Phase 1  →  Scaffolding              (both projects boot, MongoDB connects)           ✅ DONE (backend), frontend shell exists
+Phase 2  →  Backend Auth             (register, login, logout, /me)                   ✅ DONE (backend code complete, not REST-tested yet)
+Phase 3  →  Frontend Auth            (login page, Zustand, protected routes)          ✅ DONE
+Phase 4  →  Room CRUD                (create, browse, view rooms — REST only)         ✅ DONE
+Phase 5  →  Socket.io Foundation     (connect, join/leave rooms, participant presence) ✅ DONE
+Phase 6  →  Real-time Chat           (send, receive, persist messages)                ✅ DONE
+Phase 7  →  Study Timer              (start, pause, sync, end — shared across clients) ✅ DONE
+Phase 8  →  Session History          (history page, stats, React Query invalidation)  ✅ DONE
+Phase 9  →  Activity Dashboard       (stats bar, recent activity, invite, settings)   ✅ DONE
+Phase 10 →  Deployment               (Render + Vercel, production smoke test)         ❌ NOT STARTED
 ```
 
 **Time estimate given your deadline:**
