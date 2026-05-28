@@ -1,6 +1,7 @@
 import { Response } from 'express';
 import Room from '../models/Room';
 import User from '../models/User';
+import Message from '../models/Message';
 import { AuthRequest } from '../middleware/authMiddleware';
 
 export const getRooms = async (req: AuthRequest, res: Response): Promise<void> => {
@@ -144,4 +145,17 @@ export const inviteUser = async (req: AuthRequest, res: Response): Promise<void>
   }
 
   res.json({ success: true, message: 'User invited' });
+};
+
+export const getRoomMessages = async (req: AuthRequest, res: Response): Promise<void> => {
+  const page = parseInt(String(req.query.page ?? '1'));
+  const limit = parseInt(String(req.query.limit ?? '50'));
+
+  const messages = await Message.find({ room: req.params.id })
+    .populate('sender', 'name avatar')
+    .sort({ createdAt: 1 })
+    .skip((page - 1) * limit)
+    .limit(limit);
+
+  res.json({ success: true, messages });
 };
