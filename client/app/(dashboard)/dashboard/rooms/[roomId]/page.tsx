@@ -1,10 +1,9 @@
 'use client';
-import { use } from 'react';
-import { useGetRoom } from '@/hooks/useRooms';
+import { use, useState } from 'react';
+import { useGetRoom, useInviteUser } from '@/hooks/useRooms';
 import { useRoomSocket } from '@/socket/useRoomSocket';
 import { useTimerSocket } from '@/socket/useTimerSocket';
 import { useRoomStore } from '@/store/roomStore';
-import { useInviteUser } from '@/hooks/useRooms';
 import { useAuthStore } from '@/store/authStore';
 import { StudyTimer } from '@/components/room/StudyTimer';
 import { TimerControls } from '@/components/room/TimerControls';
@@ -16,13 +15,11 @@ import { Badge } from '@/components/ui/Badge';
 import { Modal } from '@/components/ui/Modal';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
-import { useState } from 'react';
 
 export default function RoomPage({ params }: { params: Promise<{ roomId: string }> }) {
   const { roomId } = use(params);
   const { data: room, isLoading } = useGetRoom(roomId);
   const { user } = useAuthStore();
-  const { clearActiveRoom } = useRoomStore();
 
   useRoomSocket(roomId);
   const timerActions = useTimerSocket(roomId);
