@@ -18,12 +18,14 @@ export const StudyTimer = () => {
   }, [timer.isRunning, timer.startedAt, timer.elapsed]);
 
   return (
-    <div className="flex flex-col items-center gap-1">
-      <span className="font-mono text-5xl font-bold tabular-nums text-gray-900">
-        {formatTimer(display)}
-      </span>
-      <span className="text-xs text-gray-400">
-        {timer.isRunning ? '● Recording' : display > 0 ? 'Paused' : 'Not started'}
+    <div className="flex flex-col items-center gap-2">
+      <div className="rounded-2xl border-2 border-brand-black bg-brand-yellow px-10 py-6 shadow-[4px_4px_0px_#0A0A0A]">
+        <span className="font-mono text-5xl font-black tabular-nums text-brand-black tracking-tight">
+          {formatTimer(display)}
+        </span>
+      </div>
+      <span className={`text-xs font-bold uppercase tracking-widest ${timer.isRunning ? 'text-green-600' : 'text-brand-black/40'}`}>
+        {timer.isRunning ? '● Recording' : display > 0 ? '⏸ Paused' : 'Not started'}
       </span>
     </div>
   );

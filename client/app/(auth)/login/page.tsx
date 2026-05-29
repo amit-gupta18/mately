@@ -25,22 +25,27 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex h-screen items-center justify-center">
-      <div className="w-full max-w-sm rounded-2xl bg-white p-8 shadow-lg">
-        <h1 className="mb-1 text-2xl font-bold text-gray-900">Welcome back</h1>
-        <p className="mb-6 text-sm text-gray-400">Sign in to continue studying</p>
+    <div className="flex h-screen bg-brand-yellow dot-grid">
+      <div className="m-auto w-full max-w-sm">
+        <div className="mb-6 text-center">
+          <Link href="/" className="text-2xl font-black text-brand-black">Mately ⚡</Link>
+        </div>
+        <div className="rounded-2xl border-2 border-brand-black bg-brand-white p-8 shadow-[6px_6px_0px_#0A0A0A]">
+          <h1 className="mb-1 text-2xl font-black text-brand-black">Welcome back.</h1>
+          <p className="mb-6 text-sm font-medium text-brand-black/50">Sign in to keep studying</p>
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <Input label="Email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com" required />
-          <Input label="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••" required />
-          {error && <p className="text-sm text-red-500">{error}</p>}
-          <Button type="submit" loading={loginMutation.isPending} className="w-full">Sign In</Button>
-        </form>
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            <Input label="Email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@example.com" required />
+            <Input label="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••" required />
+            {error && <p className="text-sm font-bold text-red-500">{error}</p>}
+            <Button type="submit" loading={loginMutation.isPending} size="lg" className="w-full mt-1">Sign In</Button>
+          </form>
 
-        <p className="mt-4 text-center text-sm text-gray-400">
-          No account?{' '}
-          <Link href="/register" className="text-indigo-600 hover:underline">Create one</Link>
-        </p>
+          <p className="mt-5 text-center text-sm font-medium text-brand-black/50">
+            No account?{' '}
+            <Link href="/register" className="font-black text-brand-black underline underline-offset-2">Create one</Link>
+          </p>
+        </div>
       </div>
     </div>
   );

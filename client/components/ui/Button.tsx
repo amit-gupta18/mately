@@ -13,16 +13,16 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variantClasses: Record<Variant, string> = {
-  primary:   'bg-indigo-600 text-white hover:bg-indigo-700 disabled:bg-indigo-400',
-  secondary: 'bg-gray-100 text-gray-800 hover:bg-gray-200 disabled:bg-gray-50',
-  danger:    'bg-red-600 text-white hover:bg-red-700 disabled:bg-red-400',
-  ghost:     'bg-transparent text-gray-600 hover:bg-gray-100',
+  primary:   'bg-brand-black text-brand-white hover:bg-brand-black/80 disabled:bg-brand-black/40',
+  secondary: 'bg-brand-white text-brand-black border-2 border-brand-black hover:bg-brand-yellow disabled:opacity-50',
+  danger:    'bg-brand-black text-brand-white border border-red-500 hover:bg-red-600 disabled:opacity-40',
+  ghost:     'bg-transparent text-brand-black hover:bg-brand-black/5',
 };
 
 const sizeClasses: Record<Size, string> = {
-  sm: 'px-3 py-1.5 text-sm',
-  md: 'px-4 py-2 text-sm',
-  lg: 'px-5 py-2.5 text-base',
+  sm: 'px-4 py-1.5 text-xs',
+  md: 'px-5 py-2 text-sm',
+  lg: 'px-7 py-3 text-base',
 };
 
 export const Button = ({ variant = 'primary', size = 'md', loading, disabled, className, children, ...props }: Props) => (
@@ -30,7 +30,7 @@ export const Button = ({ variant = 'primary', size = 'md', loading, disabled, cl
     {...props}
     disabled={disabled || loading}
     className={cn(
-      'inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:cursor-not-allowed',
+      'inline-flex items-center justify-center gap-2 rounded-full font-bold tracking-tight transition-all focus:outline-none focus:ring-2 focus:ring-brand-black focus:ring-offset-2 disabled:cursor-not-allowed',
       variantClasses[variant],
       sizeClasses[size],
       className,

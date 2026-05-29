@@ -31,11 +31,11 @@ export const CreateRoomModal = ({ isOpen, onClose }: Props) => {
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <Input label="Room Name" value={name} onChange={(e) => setName(e.target.value)} placeholder="e.g. DSA Prep Session" error={error} />
         <Input label="Description (optional)" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="What are you studying?" />
-        <label className="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
-          <input type="checkbox" checked={isPrivate} onChange={(e) => setIsPrivate(e.target.checked)} className="rounded" />
+        <label className="flex items-center gap-2 text-sm font-bold text-brand-black cursor-pointer select-none">
+          <input type="checkbox" checked={isPrivate} onChange={(e) => setIsPrivate(e.target.checked)} className="rounded border-2 border-brand-black h-4 w-4" />
           Private room (invite only)
         </label>
-        <div className="flex gap-2 justify-end pt-2">
+        <div className="flex gap-2 justify-end pt-1">
           <Button type="button" variant="secondary" onClick={onClose}>Cancel</Button>
           <Button type="submit" loading={createRoom.isPending}>Create Room</Button>
         </div>

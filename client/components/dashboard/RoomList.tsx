@@ -7,13 +7,13 @@ interface Props { rooms?: Room[]; isLoading?: boolean; emptyText?: string }
 
 export const RoomList = ({ rooms, isLoading, emptyText = 'No rooms found.' }: Props) => {
   if (isLoading) return (
-    <div className="flex justify-center py-12">
-      <Spinner size="lg" className="text-indigo-600" />
+    <div className="flex justify-center py-16">
+      <Spinner size="lg" />
     </div>
   );
   if (!rooms?.length) return (
-    <div className="rounded-xl border border-dashed border-gray-300 p-12 text-center text-gray-400">
-      {emptyText}
+    <div className="rounded-2xl border-2 border-dashed border-brand-border p-14 text-center">
+      <p className="text-sm font-bold text-brand-black/40">{emptyText}</p>
     </div>
   );
   return (

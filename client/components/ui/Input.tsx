@@ -10,9 +10,9 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 export const Input = forwardRef<HTMLInputElement, Props>(({ label, error, className, id, ...props }, ref) => {
   const inputId = id ?? label?.toLowerCase().replace(/\s+/g, '-');
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-col gap-1.5">
       {label && (
-        <label htmlFor={inputId} className="text-sm font-medium text-gray-700">
+        <label htmlFor={inputId} className="text-sm font-bold text-brand-black">
           {label}
         </label>
       )}
@@ -21,14 +21,14 @@ export const Input = forwardRef<HTMLInputElement, Props>(({ label, error, classN
         id={inputId}
         {...props}
         className={cn(
-          'rounded-lg border px-3 py-2 text-sm outline-none transition-colors placeholder:text-gray-400',
+          'rounded-xl border-2 bg-brand-white px-4 py-2.5 text-sm text-brand-black outline-none transition-colors placeholder:text-black/30 disabled:bg-brand-gray',
           error
-            ? 'border-red-400 focus:border-red-500 focus:ring-1 focus:ring-red-500'
-            : 'border-gray-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500',
+            ? 'border-red-500 focus:border-red-600'
+            : 'border-brand-border focus:border-brand-black',
           className,
         )}
       />
-      {error && <p className="text-xs text-red-500">{error}</p>}
+      {error && <p className="text-xs font-medium text-red-500">{error}</p>}
     </div>
   );
 });
