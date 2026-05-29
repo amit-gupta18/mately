@@ -10,8 +10,9 @@ export const StudyTimer = () => {
   useEffect(() => {
     setDisplay(timer.elapsed);
     if (!timer.isRunning || !timer.startedAt) return;
+    const startMs = typeof timer.startedAt === 'number' ? timer.startedAt : Number(timer.startedAt);
     const tick = setInterval(() => {
-      setDisplay(Math.floor((Date.now() - timer.startedAt!) / 1000));
+      setDisplay(Math.floor((Date.now() - startMs) / 1000));
     }, 1000);
     return () => clearInterval(tick);
   }, [timer.isRunning, timer.startedAt, timer.elapsed]);

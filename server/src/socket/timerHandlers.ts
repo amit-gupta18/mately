@@ -15,7 +15,7 @@ export const registerTimerHandlers = (io: Namespace, socket: Socket): void => {
       const startedAt = new Date();
       await Session.create({ room: roomId, startedBy: userId, startedAt, status: 'active' });
 
-      io.to(roomId).emit('timer:started', { startedAt, startedBy: userId });
+      io.to(roomId).emit('timer:started', { startedAt: startedAt.getTime(), startedBy: userId });
     } catch {
       socket.emit('error', { message: 'Failed to start timer' });
     }
@@ -62,7 +62,7 @@ export const registerTimerHandlers = (io: Namespace, socket: Socket): void => {
       }
 
       const elapsed = Math.floor((Date.now() - session.startedAt.getTime()) / 1000);
-      socket.emit('timer:sync', { elapsed, isRunning: true, startedAt: session.startedAt });
+      socket.emit('timer:sync', { elapsed, isRunning: true, startedAt: session.startedAt.getTime() });
     } catch {
       socket.emit('error', { message: 'Failed to sync timer' });
     }
