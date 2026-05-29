@@ -5,10 +5,9 @@ let socket: Socket | null = null;
 
 export const getSocket = (): Socket => {
   if (!socket) {
-    socket = io(SOCKET_URL, {
+    socket = io(`${SOCKET_URL}/study`, {
       withCredentials: true,
       autoConnect: false,
-      path: '/socket.io',
     });
   }
   return socket;
